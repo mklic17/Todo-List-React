@@ -2,3 +2,11 @@
     border: 1px solid black;
     padding-left: 3px;
 }
+
+#greenFont {
+    color: green;
+}
+
+#redFont {
+    color: red;
+}

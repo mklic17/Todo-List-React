@@ -7,14 +7,20 @@ import CreateListEntry from './todo/CreateListEntry'
 function App() {
   const toDoListItems = [
     {
-      priority: 3,
+      title: "Laundry",
       description: "Fold the Laundry",
-      createdBy: "Mitchell Klich"
+      createdBy: "Mitchell Klich",
+      createdDate: 1632867561374,
+      complete: true,
+      dateCompleted: 1632867562374
     },
     {
-      priority: 1,
+      title: "Homework",
       description: "Finish your Homework for CSC 436",
-      createdBy: "Mitchell Klich"
+      createdBy: "Mitchell Klich",
+      createdDate: 1632867563374,
+      complete: false,
+      dateCompleted: 0
     }
   ]
   
