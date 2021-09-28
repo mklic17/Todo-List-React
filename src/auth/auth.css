@@ -1,0 +1,27 @@
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.form-signin {
+    /* width: 100%; */
+    /* max-width: 22%; */
+    /* max-width: 400px; */
+}
+
+form {
+    
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    font-size: 1em;
+    /* max-width: 400px; */
+}
+
+#loginHere {
+    text-align: center;
+}
