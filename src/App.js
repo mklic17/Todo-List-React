@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, { useReducer } from 'react'
 import Navbar from './fragments/navbar'
 import List from './todo/List'
 import CreateListEntry from './todo/CreateListEntry'
+import Reducer from './Reducer'
 
 function App() {
   const toDoListItems = [
@@ -23,11 +24,13 @@ function App() {
     }
   ]
   
-  const [user, setUser] = useState('');
+  const [state, dispatch] = useReducer(Reducer, {user: ''});
+  const { user } = state; // Define the starting state
+
 
   return (
     <div>
-      <Navbar user={user} setUser={setUser}/>
+      <Navbar user={user} dispatchUser={dispatch}/>
       <div class="row">
            <div class="col-md-6">             
             <CreateListEntry user="Update This"/>
