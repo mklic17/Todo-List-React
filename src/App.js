@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from './fragments/navbar'
-import Logout from './auth/Logout'
 import List from './todo/List'
 import CreateListEntry from './todo/CreateListEntry'
 
@@ -24,12 +23,11 @@ function App() {
     }
   ]
   
-  const user = "Mitchell Klich";
-
+  const [user, setUser] = useState('');
 
   return (
     <div>
-      <Navbar user={user}/>
+      <Navbar user={user} setUser={setUser}/>
       <div class="row">
            <div class="col-md-6">             
             <CreateListEntry user="Update This"/>
@@ -37,7 +35,6 @@ function App() {
           <div class="col-md-6">
             <List listEntrys={toDoListItems} />
           </div> 
-          <Logout user={user}/> {/* This wouldn't be here normally, just showing on page */}
 
       </div>
     </div>

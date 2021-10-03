@@ -1,19 +1,23 @@
 import React from 'react';
+import Login from '../auth/Login'
+import Logout from '../auth/Logout'
+import Registration from '../auth/Registration'
 
-export default function Navbar(user){
+export default function Navbar({user, setUser}){
 
     if (user) {
-        // There is probably a better way to do this, but for now I will hardcode
         return (
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <span class="navbar-brand mb-0 h1">To Do</span>
+                <Logout user={user} setUser={setUser}/>
+                {/* <span class="navbar-brand mb-0 h1">To Do</span>
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         Logout
                     </li>
-                </ul>
+                </ul> */}
             </nav>
         );
+
     } else {
         return (
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,12 +25,11 @@ export default function Navbar(user){
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Login</a> 
-                        {/* Redirect to login form */}
+                        <Login setUser={setUser} />
+
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Register</a>   
-                        {/* Redirect to Register */}
+                        <Registration setUser={setUser} />
                     </li>
                 </ul>
             </nav>
