@@ -1,6 +1,7 @@
 export default function appReducer(state, action) {
     return {
-        user: userReducer(state.user, action)
+        user: userReducer(state.user, action),
+        toDo: toDoReducer(state.toDo, action)
     }
 }
 
@@ -17,6 +18,25 @@ function userReducer(state, action) {
             return state;
     }
     
+}
+
+function toDoReducer(state, action) {
+    switch (action.type) {
+        case 'CREATE_TODO':
+            const newToDo = {
+                title: action.title, 
+                description: action.description,
+                createdBy: action.createdBy,
+                createdDate: action.createdDate,
+                completedDate: action.completedDate
+            }
+            return [newToDo, ...state];
+        case 'TOGGLE_TODO':
+        case 'DELETE_TODO':
+
+        default:
+            return state;
+    }
 }
 
 
