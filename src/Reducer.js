@@ -20,6 +20,7 @@ function userReducer(state, action) {
     
 }
 
+// Action types: CREATE_TODO, TOGGLE_TODO, DELETE_TODO
 function toDoReducer(state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
@@ -34,7 +35,6 @@ function toDoReducer(state, action) {
             return [newToDo, ...state];
         case 'TOGGLE_TODO':
             return state.map(todo => todo.uid !== action.uid ? todo : {...todo, completedDate: Date.now()})
-
         case 'DELETE_TODO':
             return state.filter(todo => todo.uid !== action.uid);
         default:

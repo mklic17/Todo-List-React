@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import Navbar from './fragments/navbar'
 import ToDoList from './todo/ToDoList'
 import CreateToDoEntry from './todo/CreateToDoEntry'
@@ -46,12 +46,7 @@ function App() {
     <div>
       <Navbar user={ user } dispatchUser={ dispatch }/>
       <div class="row">
-           {/* <div class="col-md-6">
-            <CreateToDoEntry user={ user } dispatchPosts={ dispatch }/>
-          </div>
-          <div class="col-md-6">
-            <ToDoList posts={ toDo } dispatchPosts={ dispatch } />
-          </div>  */}
+   
           {main}
 
       </div>
