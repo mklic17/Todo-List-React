@@ -1,23 +1,30 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 
-export default function Registration() {
+export default function Registration( {dispatchUser} ) {
+    const [formData, setFormData] = useState({
+        name: '',
+        username: '',
+        password: '',
+        repeatPassword: ''
+    });
+    
 
     return (
-        <form onSubmit={e => e.preventDefault()}>
-            <label htmlFor="firstName-input">First Name</label>
-            <input type="text" name="firstName-input" id="firstName-input" />
+        <form onSubmit={evt => { evt.preventDefault(); dispatchUser({type: 'REGISTRATION', username: formData.username}); }}>
+            <label htmlFor="name-input">Name</label>
+            <input type="text" name="name-input" value={formData.name} onChange={evt => setFormData({...formData, name: evt.target.value})} class="form-control" placeholder="Name"></input>
             <br/>
-            <label htmlFor="lastName-input">First Name</label>
-            <input type="text" name="lastName-input" id="lastName-input" />
+            <label htmlFor="username-input">UserName</label>
+            <input type="text" name="username-input" value={formData.username} onChange={evt => setFormData({...formData, username: evt.target.value})} class="form-control" placeholder="Username"></input>
             <br/>
-            <label htmlFor="register-password">Password:</label>
-            <input type="password" name="register-password" id="register-password" />
+            <label htmlFor="password-input">Password</label>
+            <input type="password" name="password-input" value={formData.password} onChange={evt => setFormData({...formData, password: evt.target.value})} class="form-control" placeholder="Password"></input>
             <br/>
-            <label htmlFor="register-password-repeat">Repeat password:</label>
-            <input type="password" name="register-password-repeat" id="register-password-repeat" />
+            <label htmlFor="repeat-password">Repeat Password</label>
+            <input type="password" name="repeat-password" value={formData.repeatPassword} onChange={evt => setFormData({...formData, repeatPassword: evt.target.value})} class="form-control" placeholder="Password"></input>
             <br/>
-            <input type="submit" value="Register" />
-        </form>   
-    )
+            <button class="btn btn-md btn-primary btn-block" disabled={formData.password !== formData.repeatPassword || formData.password.length === 0 } type="submit">Login</button>
+       </form>
+    );
 }
