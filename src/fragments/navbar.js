@@ -1,30 +1,25 @@
 import React from 'react';
-import Login from '../auth/Login'
 import Logout from '../auth/Logout'
-import Registration from '../auth/Registration'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default function Navbar({user, dispatchUser}){
-
-    if (user) {
-        return (
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <Logout user={user} dispatchUser={dispatchUser}/>
-            </nav>
-        );
-
+    let userCodeInNavbar;
+    if(user) {
+        userCodeInNavbar = 
+            <Logout user={user} dispatchUser={dispatchUser}/>
     } else {
-        return (
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <span class="navbar-brand mb-0 h1">To Do</span>
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <Login dispatchUser={dispatchUser} />
-                    </li>
-                    <li class="nav-item active">
-                        <Registration dispatchUser={dispatchUser} />
-                    </li>
-                </ul>
-            </nav>
-        );
+        userCodeInNavbar = <div></div>
     }
+
+    return (
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand mb-0 h1" href="">To Do</a>
+            
+                <div class="d-flex">
+                    { userCodeInNavbar }
+                </div>
+            </div>
+        </nav>
+    )
 }

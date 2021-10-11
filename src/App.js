@@ -3,6 +3,9 @@ import Navbar from './fragments/navbar'
 import ToDoList from './todo/ToDoList'
 import CreateToDoEntry from './todo/CreateToDoEntry'
 import appReducer from './Reducer'
+import Login from './auth/Login'
+import Registration from './auth/Registration'
+import 'bootstrap/dist/css/bootstrap.css'
 
 function App() {
   const toDoListItems = [
@@ -30,24 +33,32 @@ function App() {
   let main;
   if(user)
     main = 
-      <div>
-          <div class="col-md-6">
+      <div className="row">
+          <div className="col-md-6">
             <CreateToDoEntry user={ user } dispatchPosts={ dispatch }/>
           </div>
-          <div class="col-md-6">
+          <div className="col-md-6">
             <ToDoList posts={ toDo } dispatchPosts={ dispatch } />
           </div> 
       </div>
     else {
-      main = <div></div>
+      main = 
+        <div className="row">
+          <div className="col-md-6">
+            <Login dispatchUser={dispatch} />
+          </div>
+          <div className="col-md-6">
+            <Registration dispatchUser={dispatch} />
+          </div>
+        </div>
     }
 
   return (
     <div>
       <Navbar user={ user } dispatchUser={ dispatch }/>
-      <div class="row">
+      <div className="container">
    
-          {main}
+          { main}
 
       </div>
     </div>
