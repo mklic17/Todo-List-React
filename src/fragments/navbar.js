@@ -15,7 +15,6 @@ export default function Navbar({user, dispatchUser}){
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand mb-0 h1" href="">To Do</a>
-            
                 <div class="d-flex">
                     { userCodeInNavbar }
                 </div>

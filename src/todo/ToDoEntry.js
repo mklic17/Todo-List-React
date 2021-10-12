@@ -21,15 +21,14 @@ export default function ToDoEntry({uid, title, description, createdBy, createdDa
             </div>
     }
     return (
-        <div id="listStyling">
-            <h3>{ title }</h3>
-            <p>{ uid }</p>
-            <p>{ description }</p>
-            <p>{ createdBy }</p>
-            <p>{ new Date(createdDate).toString() }</p>
-            { completedVar }
-            <p><button onClick={ deleteEntry }>Delete</button></p>
-        </div>
+        <li class="quote-container">
+            <div class="note yellow">
+                <h3>{ title }</h3>
+                <p>{ description }</p>
+                <p>{ new Date(createdDate).toString() }<br/></p>
+                { completedVar }
+                <button onClick={ deleteEntry }>Delete</button>
+            </div>
+        </li>
     );
 }
-
