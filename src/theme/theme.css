@@ -1,0 +1,22 @@
+
+/* Sources 
+ - https://www.color-hex.com/color-palette/29241 
+ - https://getbootstrap.com/docs/5.0/components/buttons/
+ */
+
+.colorButtonList li button {
+    color: black !important;
+}
+
+#yellowButton {
+    background-color: #feff9c !important;
+}
+
+#pinkButton {
+    background-color: #ff7eb9 !important;
+}
+
+#blueButton {
+    background-color: #7afcff !important;
+}
+

@@ -12,10 +12,10 @@ export default function Navbar({user, dispatchUser}){
     }
 
     return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand mb-0 h1" href="">To Do</a>
-                <div class="d-flex">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <a className="navbar-brand mb-0 h1" href="">To Do</a>
+                <div className="d-flex">
                     { userCodeInNavbar }
                 </div>
             </div>

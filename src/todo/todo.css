@@ -1,4 +1,6 @@
 
+
+/* ToDoEntry complete/not complete icon colors */
 #greenFont {
     color: green;
 }
@@ -8,7 +10,20 @@
 }
 
 
-/* Sources 
+/* ToDoEntry Complete/Delete buttons */
+#oneButtonLayout {
+    width: 100%;
+}
+
+#oneButtonLayout button {
+    width: 100%;
+}
+
+#twoButtonLayout button {
+    width: 50%;
+}
+
+/* Sources for Sticky Note related styling
  - https://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934 
  - http://creative-punch.net/2014/02/create-css3-post-it-note/
  */
@@ -21,7 +36,6 @@ ul {
 ul,li{
     list-style: none;
     padding-left: 10px;
-
 }
 
 .quote-container {
@@ -40,8 +54,7 @@ ul,li{
     box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
 }
 
-
-.yellow {
+.note-background {
     background: #eae672;
     -webkit-transform: rotate(2deg);
     -moz-transform: rotate(2deg);
@@ -49,3 +62,5 @@ ul,li{
     -ms-transform: rotate(2deg);
     transform: rotate(2deg);
 }
+
+

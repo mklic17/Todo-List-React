@@ -7,6 +7,7 @@ import Login from './auth/Login'
 import Registration from './auth/Registration'
 import 'bootstrap/dist/css/bootstrap.css'
 
+
 function App() {
   const toDoListItems = [
     {
@@ -26,7 +27,7 @@ function App() {
       completedDate: null
     }
   ]
-  
+    
   const [state, dispatch] = useReducer(appReducer, {user: '', toDo: toDoListItems});
   const { user, toDo } = state; // Define the starting state
 
@@ -56,6 +57,7 @@ function App() {
   return (
     <div>
       <Navbar user={ user } dispatchUser={ dispatch }/>
+
       <div className="container">
    
           { main}
@@ -63,8 +65,6 @@ function App() {
       </div>
     </div>
   )
-
-
 }
 
 export default App;
