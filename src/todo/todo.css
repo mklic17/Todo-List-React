@@ -1,8 +1,6 @@
-#listStyling {
-    border: 1px solid black;
-    padding-left: 3px;
-}
 
+
+/* ToDoEntry complete/not complete icon colors */
 #greenFont {
     color: green;
 }
@@ -10,3 +8,59 @@
 #redFont {
     color: red;
 }
+
+
+/* ToDoEntry Complete/Delete buttons */
+#oneButtonLayout {
+    width: 100%;
+}
+
+#oneButtonLayout button {
+    width: 100%;
+}
+
+#twoButtonLayout button {
+    width: 50%;
+}
+
+/* Sources for Sticky Note related styling
+ - https://code.tutsplus.com/tutorials/create-a-sticky-note-effect-in-5-easy-steps-with-css3-and-html5--net-13934 
+ - http://creative-punch.net/2014/02/create-css3-post-it-note/
+ */
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul,li{
+    list-style: none;
+    padding-left: 10px;
+}
+
+.quote-container {
+    margin-top: 50px;
+    position: relative;
+}
+  
+.note {
+    color: #333;
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Satisfy;
+    /* font-size: 30px; */
+    box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
+}
+
+.note-background {
+    background: #eae672;
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    transform: rotate(2deg);
+}
+
+
