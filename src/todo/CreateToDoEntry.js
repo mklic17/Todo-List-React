@@ -1,17 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { StateContext } from '../Context';
 
-export default function CreateListEntry ({user, dispatchPosts}) {
+export default function CreateListEntry () {
 
+    const {state, dispatch} = useContext(StateContext);
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        createdBy: user,
+        createdBy: state.user,
         createdDate: '',
         completedDate: null
     });
 
      return (
-          <form onSubmit={evt => { evt.preventDefault(); dispatchPosts({type: 'CREATE_TODO', title: formData.title, description: formData.description, createdBy: user, createdDate: Date.now(), completedDate: null});}}>
+          <form onSubmit={evt => { evt.preventDefault(); dispatch({type: 'CREATE_TODO', title: formData.title, description: formData.description, createdBy: state.user, createdDate: Date.now(), completedDate: null});}}>
              <div class="form-group">
                 <label htmlFor="create-title">Title:</label>
                  <br/>
@@ -21,7 +23,7 @@ export default function CreateListEntry ({user, dispatchPosts}) {
                  <br/>
                  <textarea type="text" className="form-control" value={formData.description} onChange={evt => setFormData({...formData, description: evt.target.value})} name="create-description" id="create-description" cols="40" rows="5"/>
                  <br/>
-                 <p>Author: <b>{ user }</b></p>
+                 <p>Author: <b>{ state.user }</b></p>
                  <br/>
              </div>
              <input type="submit" value="Create" />

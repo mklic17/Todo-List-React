@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react';
+import { StateContext } from '../Context';
 
-
-export default function Registration( {dispatchUser} ) {
+export default function Registration() {
+    const {dispatch} = useContext(StateContext);
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -14,7 +15,7 @@ export default function Registration( {dispatchUser} ) {
         <div>
             <br/>
             <center><h3>Register</h3></center>
-            <form onSubmit={evt => { evt.preventDefault(); dispatchUser({type: 'REGISTRATION', username: formData.username}); }}>
+            <form onSubmit={evt => { evt.preventDefault(); dispatch({type: 'REGISTRATION', username: formData.username}); }}>
                 <label htmlFor="name-input">Name</label>
                 <input type="text" name="name-input" value={formData.name} onChange={evt => setFormData({...formData, name: evt.target.value})} className="form-control" placeholder="Name"></input>
                 <br/>

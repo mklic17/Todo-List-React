@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import ToDoEntry from './ToDoEntry'
 import ColorHeader from '../theme/ColorHeader'
-import { ThemeContext } from '../Context'
+import { ThemeContext, StateContext } from '../Context'
 
-export default function List({posts = [], dispatchPosts}) {
+export default function List() {
 
-    const [ color, setColor ] = useState('');
+    const {state} = useContext(StateContext);
+    const {toDo} = state;
+    const [ color, setColor ] = useState(ThemeContext);
 
     return (
         <div>
@@ -13,7 +15,7 @@ export default function List({posts = [], dispatchPosts}) {
             <ThemeContext.Provider value={{primary: color}}>
                 <ColorHeader setColor={setColor}/>
                 <ul>
-                    { posts.map((p, i) => <ToDoEntry {...p} uid={p.uid} title={p.title} description={p.description} createdBy={p.createdBy} createdDate={p.createdDate} dateCompleted={p.dateCompleted} key={'ToDo-' + i} dispatch={dispatchPosts} />)}
+                    { toDo.map((p, i) => <ToDoEntry {...p} uid={p.uid} title={p.title} description={p.description} createdBy={p.createdBy} createdDate={p.createdDate} dateCompleted={p.dateCompleted} key={'ToDo-' + i}/>)}
                 </ul>
             </ThemeContext.Provider>
         </div> 

@@ -5,3 +5,8 @@ export const ThemeContext = React.createContext({
     primary: '#eae672'
 });
 // Context is defined
+
+export const StateContext = React.createContext({
+    state: {},
+    dispatch: () => {}
+})

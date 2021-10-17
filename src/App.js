@@ -6,8 +6,8 @@ import appReducer from './Reducer'
 import Login from './auth/Login'
 import Registration from './auth/Registration'
 import 'bootstrap/dist/css/bootstrap.css'
-
-
+import { StateContext } from './Context'
+ 
 function App() {
   const toDoListItems = [
     {
@@ -27,7 +27,7 @@ function App() {
       completedDate: null
     }
   ]
-    
+
   const [state, dispatch] = useReducer(appReducer, {user: '', toDo: toDoListItems});
   const { user, toDo } = state; // Define the starting state
 
@@ -36,33 +36,32 @@ function App() {
     main = 
       <div className="row">
           <div className="col-md-6">
-            <CreateToDoEntry user={ user } dispatchPosts={ dispatch }/>
+            <CreateToDoEntry />
           </div>
           <div className="col-md-6">
-            <ToDoList posts={ toDo } dispatchPosts={ dispatch } />
+            <ToDoList/>
           </div> 
       </div>
     else {
       main = 
         <div className="row">
           <div className="col-md-6">
-            <Login dispatchUser={dispatch} />
+            <Login/>
           </div>
           <div className="col-md-6">
-            <Registration dispatchUser={dispatch} />
+            <Registration/>
           </div>
         </div>
     }
 
   return (
     <div>
-      <Navbar user={ user } dispatchUser={ dispatch }/>
-
-      <div className="container">
-   
-          { main}
-
-      </div>
+      <StateContext.Provider value={{state: state, dispatch: dispatch}}>
+        <Navbar/>
+        <div className="container">
+          { main }
+        </div>
+      </StateContext.Provider>
     </div>
   )
 }

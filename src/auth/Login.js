@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {StateContext} from '../Context';
 // import './auth.css'
 // import 'font-awesome/css/font-awesome.css'
 
 
-export default function Login({dispatchUser}) {
+export default function Login() {
 
+    const {dispatch} = useContext(StateContext);
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -14,7 +16,7 @@ export default function Login({dispatchUser}) {
         <div>
             <br/>
             <center><h3>Login</h3></center>
-            <form onSubmit={evt => { evt.preventDefault(); dispatchUser({type: 'LOGIN', username: formData.username}) }}>
+            <form onSubmit={evt => { evt.preventDefault(); dispatch({type: 'LOGIN', username: formData.username}) }}>
                 <label htmlFor="username-input">UserName: </label>
                 <input type="text" name="username-input" value={formData.username} onChange={evt => {setFormData({...formData, username: evt.target.value})}} className="form-control" placeholder="Username"></input>
                 <br/>

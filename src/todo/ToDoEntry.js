@@ -1,18 +1,21 @@
 import React, { useContext } from 'react'
 import './todo.css'
 import 'font-awesome/css/font-awesome.css'
-import {ThemeContext} from '../Context'
+import {ThemeContext, StateContext} from '../Context'
 
 
-export default function ToDoEntry({uid, title, description, createdBy, createdDate, completedDate, dispatch}) {
+export default function ToDoEntry({uid, title, description, createdBy, createdDate, completedDate}) {
     let completedVar;
     let completeButton;
     let buttonLayout;
 
-    const markAsComplete = () => {dispatch({type: 'TOGGLE_TODO', uid: uid})};
-    const deleteEntry = () => {dispatch({type: 'DELETE_TODO', uid: uid})};
+    const {dispatch} = useContext(StateContext);
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
+    
+    const markAsComplete = () => {dispatch({type: 'TOGGLE_TODO', uid: uid})};
+    const deleteEntry = () => {dispatch({type: 'DELETE_TODO', uid: uid})};
+
 
     if (completedDate) {
         const dateToComplete = Math.ceil((Date.now() - completedDate) / (1000 * 3600 * 24));

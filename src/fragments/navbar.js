@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Logout from '../auth/Logout'
 import 'bootstrap/dist/css/bootstrap.css'
+import { StateContext } from '../Context'
 
-export default function Navbar({user, dispatchUser}){
+export default function Navbar(){
+    const {state} = useContext(StateContext);
+
     let userCodeInNavbar;
-    if(user) {
+    if(state.user) {
         userCodeInNavbar = 
-            <Logout user={user} dispatchUser={dispatchUser}/>
+            <Logout/>
     } else {
         userCodeInNavbar = <div></div>
     }
