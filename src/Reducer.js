@@ -17,7 +17,7 @@ function userReducer(state, action) {
         default:
             return state;
     }
-    
+
 }
 
 // Action types: CREATE_TODO, TOGGLE_TODO, DELETE_TODO
@@ -25,8 +25,8 @@ function toDoReducer(state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
             const newToDo = {
-                uid: makeid(5),
-                title: action.title, 
+                id: makeid(5),
+                title: action.title,
                 description: action.description,
                 createdBy: action.createdBy,
                 createdDate: action.createdDate,
@@ -34,9 +34,9 @@ function toDoReducer(state, action) {
             }
             return [newToDo, ...state];
         case 'TOGGLE_TODO':
-            return state.map(todo => todo.uid !== action.uid ? todo : {...todo, completedDate: Date.now()})
+            return state.map(todo => todo.id !== action.id ? todo : {...todo, completedDate: Date.now()})
         case 'DELETE_TODO':
-            return state.filter(todo => todo.uid !== action.uid);
+            return state.filter(todo => todo.id !== action.id);
         default:
             return state;
     }
@@ -48,7 +48,7 @@ function makeid(length) {
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
+      result += characters.charAt(Math.floor(Math.random() *
  charactersLength));
    }
    return result;

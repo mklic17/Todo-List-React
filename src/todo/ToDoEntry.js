@@ -4,7 +4,7 @@ import 'font-awesome/css/font-awesome.css'
 import {ThemeContext, StateContext} from '../Context'
 
 
-export default function ToDoEntry({uid, title, description, createdBy, createdDate, completedDate}) {
+export default function ToDoEntry({id, title, description, createdBy, createdDate, completedDate}) {
     let completedVar;
     let completeButton;
     let buttonLayout;
@@ -12,9 +12,9 @@ export default function ToDoEntry({uid, title, description, createdBy, createdDa
     const {dispatch} = useContext(StateContext);
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
-    
-    const markAsComplete = () => {dispatch({type: 'TOGGLE_TODO', uid: uid})};
-    const deleteEntry = () => {dispatch({type: 'DELETE_TODO', uid: uid})};
+
+    const markAsComplete = () => {dispatch({type: 'TOGGLE_TODO', id: id})};
+    const deleteEntry = () => {dispatch({type: 'DELETE_TODO', id: id})};
 
 
     if (completedDate) {
@@ -26,7 +26,7 @@ export default function ToDoEntry({uid, title, description, createdBy, createdDa
         completeButton = <button onClick={markAsComplete} className="btn btn-success">Complete</button>;
         buttonLayout = "twoButtonLayout";
     }
-    
+
     return (
         <li className="quote-container">
             <div className="note note-background" style={ { background: colorName} }>

@@ -1,0 +1,35 @@
+{
+  "todos": [
+    {
+      "id": "12456",
+      "title": "Laundry",
+      "description": "Fold the Laundry",
+      "createdBy": "Mitchell Klich",
+      "createdDate": 1632867561374,
+      "completedDate": 1632867562374
+    },
+    {
+      "id": "15515",
+      "title": "Homework",
+      "description": "Finish your Homework for CSC 436",
+      "createdBy": "Mitchell Klich",
+      "createdDate": 1632867563374,
+      "completedDate": null
+    },
+    {
+      "title": "Test",
+      "description": "Test Postman",
+      "createdBy": "Mitchell Klich",
+      "createdDate": 1632867563374,
+      "completedDate": 1632869563374,
+      "id": "ONU70FP"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "mitchellklich",
+      "password": "badpassword"
+    }
+  ]
+}

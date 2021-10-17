@@ -15,9 +15,9 @@ export default function List() {
             <ThemeContext.Provider value={{primary: color}}>
                 <ColorHeader setColor={setColor}/>
                 <ul>
-                    { toDo.map((p, i) => <ToDoEntry {...p} uid={p.uid} title={p.title} description={p.description} createdBy={p.createdBy} createdDate={p.createdDate} dateCompleted={p.dateCompleted} key={'ToDo-' + i}/>)}
+                    { toDo.map((p, i) => <ToDoEntry {...p} id={p.id} title={p.title} description={p.description} createdBy={p.createdBy} createdDate={p.createdDate} dateCompleted={p.dateCompleted} key={'ToDo-' + i}/>)}
                 </ul>
             </ThemeContext.Provider>
-        </div> 
+        </div>
     )
 }

@@ -11,7 +11,7 @@ import { StateContext } from './Context'
 function App() {
   const toDoListItems = [
     {
-      uid: '12456',
+      id: '12456',
       title: "Laundry",
       description: "Fold the Laundry",
       createdBy: "Mitchell Klich",
@@ -19,7 +19,7 @@ function App() {
       completedDate: 1632867562374
     },
     {
-      uid: '15515',
+      id: '15515',
       title: "Homework",
       description: "Finish your Homework for CSC 436",
       createdBy: "Mitchell Klich",
@@ -29,7 +29,7 @@ function App() {
   ]
 
   const [state, dispatch] = useReducer(appReducer, {user: '', toDo: toDoListItems});
-  const { user, toDo } = state; // Define the starting state
+  const { user } = state; // Define the starting state
 
   let main;
   if(user)
