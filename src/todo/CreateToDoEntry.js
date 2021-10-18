@@ -14,7 +14,7 @@ export default function CreateListEntry () {
 
      return (
           <form onSubmit={evt => { evt.preventDefault(); dispatch({type: 'CREATE_TODO', title: formData.title, description: formData.description, createdBy: state.user, createdDate: Date.now(), completedDate: null});}}>
-             <div class="form-group">
+             <div className="form-group">
                 <label htmlFor="create-title">Title:</label>
                  <br/>
                  <input type="text" className="form-control" value={ formData.title } onChange={ evt => setFormData({...formData, title: evt.target.value})} name="create-title" id="create-title"/>
@@ -30,12 +30,3 @@ export default function CreateListEntry () {
          </form>   
           )
  }
- 
-
-// <form>
-//   <div class="form-group">
-//     <label for="exampleInputEmail1">Email address</label>
-//     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-//     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-//   </div>
-// </form>
