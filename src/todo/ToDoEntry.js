@@ -1,18 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext} from 'react'
 import './todo.css'
 import 'font-awesome/css/font-awesome.css'
-import {ThemeContext} from '../Context'
+import {ThemeContext, StateContext} from '../Context'
+import { useResource } from 'react-request-hook';
 
 
-export default function ToDoEntry({uid, title, description, createdBy, createdDate, completedDate, dispatch}) {
+
+export default function ToDoEntry({id, title, description, createdBy, createdDate, completedDate}) {
     let completedVar;
     let completeButton;
     let buttonLayout;
 
-    const markAsComplete = () => {dispatch({type: 'TOGGLE_TODO', uid: uid})};
-    const deleteEntry = () => {dispatch({type: 'DELETE_TODO', uid: uid})};
+    const {dispatch} = useContext(StateContext);
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
+
+    const markAsComplete = () => {
+        completedDate = Date.now();
+        patchTodo({completedDate: completedDate});
+        dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedDate});
+    };
+
+    const deleteEntry = () => {
+        deleteTodo();
+        dispatch({type: 'DELETE_TODO', id: id});
+    }
+
+    const [complete, patchTodo] = useResource(({completedDate}) => ({
+        url: `/todos/${id}`,
+        method: 'PATCH',
+        data: { completedDate }
+    }));
+
+    const [emptyToDo, deleteTodo ] = useResource(() => ({
+        url: `/todos/${id}`,
+        method: 'DELETE'
+    }));
 
     if (completedDate) {
         const dateToComplete = Math.ceil((Date.now() - completedDate) / (1000 * 3600 * 24));
@@ -23,7 +46,7 @@ export default function ToDoEntry({uid, title, description, createdBy, createdDa
         completeButton = <button onClick={markAsComplete} className="btn btn-success">Complete</button>;
         buttonLayout = "twoButtonLayout";
     }
-    
+
     return (
         <li className="quote-container">
             <div className="note note-background" style={ { background: colorName} }>

@@ -1,0 +1,50 @@
+{
+  "todos": [
+    {
+      "title": "New Entry2",
+      "description": "ENTRY",
+      "createdBy": "fff",
+      "createdDate": 1635114210725,
+      "completedDate": 1635114312934,
+      "id": "1JQNjxu"
+    },
+    {
+      "title": "Test",
+      "description": "Testttttj",
+      "createdBy": "fff",
+      "createdDate": 1635114354147,
+      "completedDate": 1635114411051,
+      "id": "woo9Fah"
+    },
+    {
+      "title": "Test Entry for Screenshot",
+      "description": "this is a test ",
+      "createdBy": "nUser",
+      "createdDate": 1635115713914,
+      "completedDate": null,
+      "id": "07WTqD4"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "mitchellklich",
+      "password": "badpassword"
+    },
+    {
+      "username": "testUser1",
+      "password": "testPassword",
+      "id": 2
+    },
+    {
+      "username": "fff",
+      "password": "fff",
+      "id": 3
+    },
+    {
+      "username": "nUser",
+      "password": "nUser",
+      "id": 4
+    }
+  ]
+}
