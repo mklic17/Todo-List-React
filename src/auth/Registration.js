@@ -1,7 +1,9 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { StateContext } from '../Context';
+import { useResource } from 'react-request-hook';
 
 export default function Registration() {
+
     const {dispatch} = useContext(StateContext);
     const [formData, setFormData] = useState({
         name: '',
@@ -9,13 +11,23 @@ export default function Registration() {
         password: '',
         repeatPassword: ''
     });
-    
+    const [ user, register ] = useResource((username, password) => ({
+        url: '/users',
+        method: 'post',
+        data: { username, password }
+    }))
+
+    useEffect(() => {
+        if (user && user.data) {
+            dispatch({ type: 'REGISTRATION', username: user.data.username })
+        }
+    }, [user])
 
     return (
         <div>
             <br/>
             <center><h3>Register</h3></center>
-            <form onSubmit={evt => { evt.preventDefault(); dispatch({type: 'REGISTRATION', username: formData.username}); }}>
+            <form onSubmit={evt => { evt.preventDefault(); register(formData.username, formData.password); } }>
                 <label htmlFor="name-input">Name</label>
                 <input type="text" name="name-input" value={formData.name} onChange={evt => setFormData({...formData, name: evt.target.value})} className="form-control" placeholder="Name"></input>
                 <br/>
@@ -33,3 +45,5 @@ export default function Registration() {
        </div>
     );
 }
+
+//register(formData.username, formData.password) }

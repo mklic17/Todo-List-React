@@ -13,8 +13,21 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
 
-    const markAsComplete = () => {dispatch({type: 'TOGGLE_TODO', id: id})};
-    const deleteEntry = () => {dispatch({type: 'DELETE_TODO', id: id})};
+    const markAsComplete = () => {
+        dispatch({type: 'TOGGLE_TODO', id: id});
+        // updateToDoEntry(id)
+    };
+
+    const deleteEntry = () => {
+        dispatch({type: 'DELETE_TODO', id: id});
+
+    };
+
+    // function updateToDoEntry(id,) {
+    //     url: '/todos/' + id,
+    //     method: 'PUT',
+
+    // }
 
 
     if (completedDate) {

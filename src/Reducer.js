@@ -17,7 +17,6 @@ function userReducer(state, action) {
         default:
             return state;
     }
-
 }
 
 // Action types: CREATE_TODO, TOGGLE_TODO, DELETE_TODO
@@ -25,7 +24,7 @@ function toDoReducer(state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
             const newToDo = {
-                id: makeid(5),
+                id: action,
                 title: action.title,
                 description: action.description,
                 createdBy: action.createdBy,
@@ -37,19 +36,9 @@ function toDoReducer(state, action) {
             return state.map(todo => todo.id !== action.id ? todo : {...todo, completedDate: Date.now()})
         case 'DELETE_TODO':
             return state.filter(todo => todo.id !== action.id);
+        case 'FETCH_POSTS':
+            return action.toDos;
         default:
             return state;
     }
-}
-
-// Source: https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() *
- charactersLength));
-   }
-   return result;
 }
