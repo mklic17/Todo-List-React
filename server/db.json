@@ -1,52 +1,20 @@
 {
   "todos": [
     {
-      "id": "12456",
-      "title": "FROM DB",
-      "description": "Fold the Laundry",
-      "createdBy": "Mitchell Klich",
-      "createdDate": 1632867561374,
-      "completedDate": 1632867562374
-    },
-    {
-      "id": "15515",
-      "title": "Homework",
-      "description": "Finish your Homework for CSC 436",
-      "createdBy": "Mitchell Klich",
-      "createdDate": 1632867563374,
-      "completedDate": null
+      "title": "New Entry2",
+      "description": "ENTRY",
+      "createdBy": "fff",
+      "createdDate": 1635114210725,
+      "completedDate": 1635114312934,
+      "id": "1JQNjxu"
     },
     {
       "title": "Test",
-      "description": "Test Postman",
-      "createdBy": "Mitchell Klich",
-      "createdDate": 1632867563374,
-      "completedDate": 1632869563374,
-      "id": "ONU70FP"
-    },
-    {
-      "title": "test",
-      "description": "testtt\n",
+      "description": "Testttttj",
       "createdBy": "fff",
-      "createdDate": 1635088643049,
-      "completedDate": null,
-      "id": "k_017yZ"
-    },
-    {
-      "title": "fff",
-      "description": "ffff",
-      "createdBy": "fff",
-      "createdDate": 1635090629001,
-      "completedDate": null,
-      "id": "2aKYr4C"
-    },
-    {
-      "title": "fff",
-      "description": "ffff",
-      "createdBy": "fff",
-      "createdDate": 1635090996147,
-      "completedDate": null,
-      "id": "SqH797F"
+      "createdDate": 1635114354147,
+      "completedDate": 1635114411051,
+      "id": "woo9Fah"
     }
   ],
   "users": [
@@ -59,6 +27,11 @@
       "username": "testUser1",
       "password": "testPassword",
       "id": 2
+    },
+    {
+      "username": "fff",
+      "password": "fff",
+      "id": 3
     }
   ]
 }

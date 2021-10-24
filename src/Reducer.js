@@ -33,7 +33,7 @@ function toDoReducer(state, action) {
             }
             return [newToDo, ...state];
         case 'TOGGLE_TODO':
-            return state.map(todo => todo.id !== action.id ? todo : {...todo, completedDate: Date.now()})
+            return state.map(todo => todo.id !== action.id ? todo : {...todo, completedDate: action.completedDate})
         case 'DELETE_TODO':
             return state.filter(todo => todo.id !== action.id);
         case 'FETCH_POSTS':

@@ -28,7 +28,7 @@ export default function CreateListEntry () {
             console.log(todo.data)
             dispatch({type: 'CREATE_TODO', id: todo.data.id, title: todo.data.title, description: todo.data.description, createdBy: todo.data.user, createdDate: todo.data.createdDate, completedDate: todo.data.completedDate})
         }
-    }, [todo])
+    }, [todo]);
 
     return (
         <form onSubmit={evt => { evt.preventDefault(); handleCreate();}}>

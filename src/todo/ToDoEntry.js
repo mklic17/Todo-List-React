@@ -1,7 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect} from 'react'
 import './todo.css'
 import 'font-awesome/css/font-awesome.css'
 import {ThemeContext, StateContext} from '../Context'
+import { useResource } from 'react-request-hook';
+
 
 
 export default function ToDoEntry({id, title, description, createdBy, createdDate, completedDate}) {
@@ -14,21 +16,26 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
     const colorName = theme.primary;
 
     const markAsComplete = () => {
-        dispatch({type: 'TOGGLE_TODO', id: id});
-        // updateToDoEntry(id)
+        completedDate = Date.now();
+        patchTodo({completedDate: completedDate});
+        dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedDate});
     };
 
     const deleteEntry = () => {
+        deleteTodo();
         dispatch({type: 'DELETE_TODO', id: id});
+    }
 
-    };
+    const [complete, patchTodo] = useResource(({completedDate}) => ({
+        url: `/todos/${id}`,
+        method: 'PATCH',
+        data: { completedDate }
+    }));
 
-    // function updateToDoEntry(id,) {
-    //     url: '/todos/' + id,
-    //     method: 'PUT',
-
-    // }
-
+    const [emptyToDo, deleteTodo ] = useResource(() => ({
+        url: `/todos/${id}`,
+        method: 'DELETE'
+    }));
 
     if (completedDate) {
         const dateToComplete = Math.ceil((Date.now() - completedDate) / (1000 * 3600 * 24));
