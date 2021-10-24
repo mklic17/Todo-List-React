@@ -15,6 +15,14 @@
       "createdDate": 1635114354147,
       "completedDate": 1635114411051,
       "id": "woo9Fah"
+    },
+    {
+      "title": "Test Entry for Screenshot",
+      "description": "this is a test ",
+      "createdBy": "nUser",
+      "createdDate": 1635115713914,
+      "completedDate": null,
+      "id": "07WTqD4"
     }
   ],
   "users": [
@@ -32,6 +40,11 @@
       "username": "fff",
       "password": "fff",
       "id": 3
+    },
+    {
+      "username": "nUser",
+      "password": "nUser",
+      "id": 4
     }
   ]
 }
