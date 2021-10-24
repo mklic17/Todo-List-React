@@ -19,7 +19,7 @@ function userReducer(state, action) {
     }
 }
 
-// Action types: CREATE_TODO, TOGGLE_TODO, DELETE_TODO
+// Action types: CREATE_TODO, TOGGLE_TODO, DELETE_TODO, FETCH_POSTS
 function toDoReducer(state, action) {
     switch (action.type) {
         case 'CREATE_TODO':

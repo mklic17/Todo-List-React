@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
       if (toDos && toDos.data) {
           dispatch({ type: 'FETCH_POSTS', toDos: toDos.data })
-          console.log('Called FETCH_POSTS')
       }
   }, [toDos])
 

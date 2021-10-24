@@ -1,4 +1,4 @@
-import React, { useContext, useEffect} from 'react'
+import React, { useContext} from 'react'
 import './todo.css'
 import 'font-awesome/css/font-awesome.css'
 import {ThemeContext, StateContext} from '../Context'
