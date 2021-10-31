@@ -1,4 +1,4 @@
-import React, { useContext} from 'react'
+import React, { useContext, useEffect} from 'react'
 import './todo.css'
 import 'font-awesome/css/font-awesome.css'
 import {ThemeContext, StateContext} from '../Context'
@@ -15,6 +15,7 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
 
+    /*
     const markAsComplete = () => {
         completedDate = Date.now();
         patchTodo({completedDate: completedDate});
@@ -25,17 +26,31 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
         deleteTodo();
         dispatch({type: 'DELETE_TODO', id: id});
     }
+    */
 
-    const [complete, patchTodo] = useResource(({completedDate}) => ({
-        url: `/todos/${id}`,
+    const [completedToDo, patchTodo] = useResource((toDoId) => ({
+        url: `/todos/${toDoId}`,
         method: 'PATCH',
-        data: { completedDate }
+        data: { completedDate: Date.now() }
     }));
 
-    const [emptyToDo, deleteTodo ] = useResource(() => ({
-        url: `/todos/${id}`,
+    const [deleteToDo, deleteTodo ] = useResource((toDoId) => ({
+        url: `/todos/${toDoId}`,
         method: 'DELETE'
     }));
+
+    useEffect(() => {
+        if(completedToDo && completedToDo.data && completedToDo.isLoading === false) {
+            console.log(completedToDo);
+            dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedToDo.data.completedDate});
+        }
+    }, [completedToDo]);
+
+    useEffect(() => {
+        if(deleteToDo && deleteToDo.data && deleteToDo.isLoading === false) {
+            dispatch({type: 'DELETE_TODO', id: id});
+        }
+    }, [deleteToDo]);
 
     if (completedDate) {
         const dateToComplete = Math.ceil((Date.now() - completedDate) / (1000 * 3600 * 24));
@@ -43,7 +58,7 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
         buttonLayout = "oneButtonLayout";
     } else {
         completedVar = <p>Not Completed <i className="fa fa-times" id="redFont"></i></p>;
-        completeButton = <button onClick={markAsComplete} className="btn btn-success">Complete</button>;
+        completeButton = <button onClick={(e) => patchTodo(id)} className="btn btn-success">Complete</button>;
         buttonLayout = "twoButtonLayout";
     }
 
@@ -56,7 +71,7 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
                 { completedVar }
                 <div id={buttonLayout}>
                     { completeButton }
-                    <button onClick={ deleteEntry } className="btn btn-danger">Delete</button>
+                    <button onClick={ (evt) => {deleteTodo(id)} } className="btn btn-danger">Delete</button>
                 </div>
             </div>
         </li>
