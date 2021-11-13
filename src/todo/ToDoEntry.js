@@ -15,19 +15,6 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
 
-    /*
-    const markAsComplete = () => {
-        completedDate = Date.now();
-        patchTodo({completedDate: completedDate});
-        dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedDate});
-    };
-
-    const deleteEntry = () => {
-        deleteTodo();
-        dispatch({type: 'DELETE_TODO', id: id});
-    }
-    */
-
     const [completedToDo, patchTodo] = useResource((toDoId) => ({
         url: `/todos/${toDoId}`,
         method: 'PATCH',
@@ -41,7 +28,6 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
 
     useEffect(() => {
         if(completedToDo && completedToDo.data && completedToDo.isLoading === false) {
-            console.log(completedToDo);
             dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedToDo.data.completedDate});
         }
     }, [completedToDo]);
