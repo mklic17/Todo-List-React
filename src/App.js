@@ -15,7 +15,10 @@ function App() {
   
   const routes = mount({
     '/': route({view: <Homepage/>}),
-
+    // future
+    // '/todo/:id': route({view: <ToDoEntry>}),
+    // '/user/:id': route({view <UserPage/>})
+    // '/user/all': route({view <AllUsers/>})
   })
 
   return (
