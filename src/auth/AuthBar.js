@@ -27,7 +27,7 @@ export default function AuthBar() {
             <Button variant="link" onClick={(e) => setShowRegister(true)}>
                     Register
             </Button>
-            {/* <Register show={showRegister} handleClose={() => setShowRegister(false)} /> */}
+            <Register show={showRegister} handleClose={() => setShowRegister(false)} />
         </div>
     }
     

@@ -1,10 +1,10 @@
-import React, {useState, useContext, useEffect} from 'react'
-import {StateContext} from '../Context';
+import React, { useState, useContext, useEffect } from 'react'
+import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
-import { Modal, Form, Button} from 'react-bootstrap';
+import { Modal, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css'
 // import './auth.css'
-import 'font-awesome/css/font-awesome.css'
+// import 'font-awesome/css/font-awesome.css'
 
 
 export default function Login({show, handleClose}) {
@@ -34,7 +34,7 @@ export default function Login({show, handleClose}) {
 
     return (
         <Modal show={show} onHide={handleClose}>
-            <form onSubmit={evt => { evt.preventDefault(); login(formData.username, formData.password) }}>
+            <Form onSubmit={evt => { evt.preventDefault(); login(formData.username, formData.password); handleClose(); }}>
 
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>
@@ -43,6 +43,7 @@ export default function Login({show, handleClose}) {
                 <Modal.Body>
                     <Form.Label htmlFor="username-input">UserName:</Form.Label>
                     <Form.Control type="text" name="username-input" value={formData.username} onChange={evt => {setFormData({...formData, username: evt.target.value})}} placeholder="Username"/>
+                    <br/>
                     <Form.Label htmlFor="password-input">Password:</Form.Label>
                     <Form.Control type="password" name="password-input" value={formData.password} onChange={evt => {setFormData({...formData, password: evt.target.value})}}placeholder="Password"/>
                     {loginFailed && <span style={{ color: 'red' }}>Invalid username or password</span>}
@@ -52,8 +53,7 @@ export default function Login({show, handleClose}) {
                     <Button className="secondary" onClick={handleClose}>Cancel</Button>
                     <Button className="primary" disabled={formData.username.length === 0} type="submit">Login</Button>
                 </Modal.Footer>
-                <h1>Hello WORLD</h1>
-            </form>
+            </Form>
         </Modal>
 
 
