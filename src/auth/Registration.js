@@ -1,8 +1,9 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
+import { Form, Modal, Button } from 'react-bootstrap'
 
-export default function Registration() {
+export default function Registration({show, handleClose}) {
 
     const {dispatch} = useContext(StateContext);
     const [formData, setFormData] = useState({
@@ -11,10 +12,10 @@ export default function Registration() {
         password: '',
         repeatPassword: ''
     });
-    const [ user, register ] = useResource((username, password) => ({
+    const [ user, register ] = useResource((name, username, password, repeatPassword) => ({
         url: '/users',
         method: 'post',
-        data: { username, password }
+        data: { name, username, password, repeatPassword }
     }))
 
     useEffect(() => {
@@ -24,26 +25,33 @@ export default function Registration() {
     }, [user])
 
     return (
-        <div>
-            <br/>
-            <center><h3>Register</h3></center>
-            <form onSubmit={evt => { evt.preventDefault(); register(formData.username, formData.password); } }>
-                <label htmlFor="name-input">Name</label>
-                <input type="text" name="name-input" value={formData.name} onChange={evt => setFormData({...formData, name: evt.target.value})} className="form-control" placeholder="Name"></input>
-                <br/>
-                <label htmlFor="username-input">UserName</label>
-                <input type="text" name="username-input" value={formData.username} onChange={evt => setFormData({...formData, username: evt.target.value})} className="form-control" placeholder="Username"></input>
-                <br/>
-                <label htmlFor="password-input">Password</label>
-                <input type="password" name="password-input" value={formData.password} onChange={evt => setFormData({...formData, password: evt.target.value})} className="form-control" placeholder="Password"></input>
-                <br/>
-                <label htmlFor="repeat-password">Repeat Password</label>
-                <input type="password" name="repeat-password" value={formData.repeatPassword} onChange={evt => setFormData({...formData, repeatPassword: evt.target.value})} className="form-control" placeholder="Password"></input>
-                <br/>
-                <button className="btn btn-md btn-primary btn-block" disabled={formData.password !== formData.repeatPassword || formData.password.length === 0 } type="submit">Login</button>
-            </form>
-       </div>
+        <Modal show={show} onHide={handleClose}>
+            <Form onSubmit={evt => { evt.preventDefault(); register(formData.name, formData.username, formData.password, formData.repeatPassword); handleClose(); } }>
+                
+                <Modal.Header closeButton>
+                    <Modal.Title>Register</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form.Label htmlFor="name-input">Name</Form.Label>
+                    <Form.Control type="text" name="name-input" value={formData.name} onChange={evt => setFormData({...formData, name: evt.target.value})} placeholder="Name"/>
+                    <br/>
+                    <Form.Label htmlFor="username-input">User name</Form.Label>
+                    <Form.Control type="text" name="username-input" value={formData.username} onChange={evt => setFormData({...formData, username: evt.target.value})} placeholder="Username"/>
+                    <br/>
+                    <Form.Label htmlFor="password-input">Password</Form.Label>
+                    <Form.Control type="password" name="password-input" value={formData.password} onChange={evt => setFormData({...formData, password: evt.target.value})} placeholder="Password"/>
+                    <br/>
+                    <Form.Label htmlFor="repeat-password">Repeat Password</Form.Label>
+                    <Form.Control type="password" name="repeat-password" value={formData.repeatPassword} onChange={evt => setFormData({...formData, repeatPassword: evt.target.value})} placeholder="Password Confirmation"/>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>Cancel</Button>
+                    <Button variant="primary" type="submit" disabled={formData.username.length === 0 || formData.password.length === 0 || formData.password !== formData.repeatPassword}>Register</Button>
+                </Modal.Footer>
+    
+            </Form>
+        </Modal>
     );
 }
-
-//register(formData.username, formData.password) }
