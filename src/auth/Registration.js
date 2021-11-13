@@ -12,10 +12,10 @@ export default function Registration({show, handleClose}) {
         password: '',
         repeatPassword: ''
     });
-    const [ user, register ] = useResource((username, password) => ({
+    const [ user, register ] = useResource((name, username, password, repeatPassword) => ({
         url: '/users',
         method: 'post',
-        data: { username, password }
+        data: { name, username, password, repeatPassword }
     }))
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function Registration({show, handleClose}) {
 
     return (
         <Modal show={show} onHide={handleClose}>
-            <Form onSubmit={evt => { evt.preventDefault(); register(formData.username, formData.password); handleClose(); } }>
+            <Form onSubmit={evt => { evt.preventDefault(); register(formData.name, formData.username, formData.password, formData.repeatPassword); handleClose(); } }>
                 
                 <Modal.Header closeButton>
                     <Modal.Title>Register</Modal.Title>
@@ -48,7 +48,7 @@ export default function Registration({show, handleClose}) {
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-                    <Button variant="primary" type="submit" disabled={formData.username.length === 0 || formData.password.length === 0 || formData.password !== formData.passwordRepeat}>Register</Button>
+                    <Button variant="primary" type="submit" disabled={formData.username.length === 0 || formData.password.length === 0 || formData.password !== formData.repeatPassword}>Register</Button>
                 </Modal.Footer>
     
             </Form>

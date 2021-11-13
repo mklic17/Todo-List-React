@@ -1,9 +1,9 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import Logout from '../auth/Logout'
 import Login from '../auth/Login'
 import Register from '../auth/Registration'
 import { StateContext } from '../Context'
-import {Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 
 export default function AuthBar() {

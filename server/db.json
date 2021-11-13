@@ -85,6 +85,18 @@
       "username": "nUser",
       "password": "nUser",
       "id": 4
+    },
+    {
+      "name": "testUset",
+      "username": "hi",
+      "id": 5
+    },
+    {
+      "name": "hello",
+      "username": "hello",
+      "password": "hi",
+      "repeatPassword": "hi",
+      "id": 6
     }
   ]
 }

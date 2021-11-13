@@ -3,8 +3,6 @@ import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
 import { Modal, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css'
-// import './auth.css'
-// import 'font-awesome/css/font-awesome.css'
 
 
 export default function Login({show, handleClose}) {
