@@ -5,7 +5,7 @@ import ToDoEntry from '../todo/ToDoEntry'
 
 
 
-export default function Todopage({ id }) {
+export default function TodoPage({ id }) {
     const [ todo, getTodo ] = useResource(() => ({
         url: `/todo/${id}`,
         method: 'get'

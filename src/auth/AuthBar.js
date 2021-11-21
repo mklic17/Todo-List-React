@@ -8,12 +8,12 @@ import { Button } from 'react-bootstrap'
 
 export default function AuthBar() {
 
-    const {state} = useContext(StateContext);
+    const { state } = useContext(StateContext);
     const [showLogin, setShowLogin] = useState(false)
     const [showRegister, setShowRegister] = useState(false)
     let userCodeInNavbar;
 
-    if(state.user) {
+    if(state.user.username) {
         userCodeInNavbar = 
             <Logout/>
     } else {
@@ -25,13 +25,11 @@ export default function AuthBar() {
             <Login show={showLogin} handleClose={() => setShowLogin(false)} />
 
             <Button variant="link" onClick={(e) => setShowRegister(true)}>
-                    Register
+                Register
             </Button>
             <Register show={showRegister} handleClose={() => setShowRegister(false)} />
         </div>
     }
-    
-
 
     return (
         <span>

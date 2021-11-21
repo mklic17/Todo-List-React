@@ -6,24 +6,26 @@ import { useResource } from 'react-request-hook';
 
 
 
-export default function ToDoEntry({id, title, description, createdBy, createdDate, completedDate}) {
+export default function ToDoEntry({ id, title, description, createdBy, createdDate, completedDate }) {
     let completedVar;
     let completeButton;
     let buttonLayout;
 
-    const {dispatch} = useContext(StateContext);
+    const { dispatch, state } = useContext(StateContext);
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
 
     const [completedToDo, patchTodo] = useResource((toDoId) => ({
-        url: `/todos/${toDoId}`,
+        url: `/todo/${toDoId}/complete`,
         method: 'PATCH',
-        data: { completedDate: Date.now() }
-    }));
+        headers: { 'Authorization': `${state.user.access_token}` }
+    }));     
 
+    
     const [deleteToDo, deleteTodo ] = useResource((toDoId) => ({
-        url: `/todos/${toDoId}`,
-        method: 'DELETE'
+        url: `/todo/${toDoId}`,
+        method: 'DELETE',
+        headers: { 'Authorization': `${state.user.access_token}` }
     }));
 
     useEffect(() => {
@@ -44,13 +46,14 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
         buttonLayout = "oneButtonLayout";
     } else {
         completedVar = <p>Not Completed <i className="fa fa-times" id="redFont"></i></p>;
-        completeButton = <button onClick={(e) => patchTodo(id)} className="btn btn-success">Complete</button>;
+        completeButton = <button onClick={(evt) => patchTodo(id)} className="btn btn-success">Complete</button>;
         buttonLayout = "twoButtonLayout";
     }
 
     return (
         <li className="quote-container">
             <div className="note note-background" style={ { background: colorName} }>
+                <h3>Temp: { id }</h3>
                 <h3>{ title }</h3>
                 <p>{ description }</p>
                 <p>{ new Date(createdDate).toLocaleDateString('en-US') }<br/></p>
