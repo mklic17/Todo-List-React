@@ -5,17 +5,19 @@
 	import appReducer from './Reducer'
 	import 'bootstrap/dist/css/bootstrap.css'
 	import { StateContext } from './Context'
-	import Homepage from './pages/Homepage';
-	import Todopage from './pages/Todopage';
+	import WelcomePage from './pages/WelcomePage';
+
+	import Todopage from './pages/TodoPage';
 
 
 	function App() {
 
-	const [state, dispatch] = useReducer(appReducer, {user: '', toDo: []});
-	const { user } = state;
+	const [state, dispatch] = useReducer(appReducer, {user: {}, toDo: []});
+	// const { user } = state;
 
 	const routes = mount({
-	'/': route({ view: <Homepage/> }),
+	'/': route({ view: <WelcomePage/> }),
+	// '/todo': route({view: <Homepage/> }),
 	'/todo/:id': route(req => {
 		return { view: <Todopage id={req.params.id} /> }
 	}),
@@ -27,7 +29,7 @@
 	return (
 	<div>
 		<StateContext.Provider value={{state: state, dispatch: dispatch}}>
-		<Router routes = {routes}>
+		<Router routes = { routes }>
 			<Navbar/>
 			<div className="container">
 				<View/>

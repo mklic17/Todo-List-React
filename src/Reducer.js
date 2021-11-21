@@ -9,11 +9,16 @@ export default function appReducer(state, action) {
 function userReducer(state, action) {
     switch (action.type){
         case 'LOGIN':
-            return action.username
         case 'LOGOUT':
-            return ''
+            return {
+                'username': undefined,
+                'access_token': undefined
+            }
         case 'REGISTRATION':
-            return action.username
+            return {
+                'username': action.username,
+                'access_token': action.access_token
+            }
         default:
             return state;
     }
@@ -24,7 +29,7 @@ function toDoReducer(state, action) {
     switch (action.type) {
         case 'CREATE_TODO':
             const newToDo = {
-                id: action,
+                id: action.id,
                 title: action.title,
                 description: action.description,
                 createdBy: action.createdBy,
