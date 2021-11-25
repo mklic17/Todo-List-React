@@ -27,7 +27,8 @@ export default function Login({show, handleClose}) {
                 alert('failed');
             } else {
                 setLoginFailed(false);
-                dispatch({ type: 'REGISTRATION', 'username': formData.username, access_token: user.data.access_token });
+                console.log('UserId: ' + user.data.id);
+                dispatch({ type: 'REGISTRATION', 'id': user.data.id, 'username': formData.username, access_token: user.data.access_token });
             }
         } 
     }, [user]);

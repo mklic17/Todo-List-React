@@ -4,6 +4,7 @@ import Login from '../auth/Login'
 import Register from '../auth/Registration'
 import { StateContext } from '../Context'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-navi'
 
 
 export default function AuthBar() {
@@ -15,7 +16,14 @@ export default function AuthBar() {
 
     if(state.user.username) {
         userCodeInNavbar = 
+        <span>
             <Logout/>
+            <Link href={`/user/${state.user.id}`}>My Profile</Link>
+            <br/>
+            <Link href={`/user/all`}>Discover other Users</Link>
+        </span>
+            
+
     } else {
         userCodeInNavbar = 
         <div className="justify-content-end">
