@@ -6,8 +6,10 @@
 	import 'bootstrap/dist/css/bootstrap.css'
 	import { StateContext } from './Context'
 	import WelcomePage from './pages/WelcomePage';
+	// import TodoPage from './pages/TodoPage';
+	import UserPage from './pages/UserPage';
+	import AllUsersPage from './pages/AllUsersPage';
 
-	import Todopage from './pages/TodoPage';
 
 
 	function App() {
@@ -16,15 +18,16 @@
 	// const { user } = state;
 
 	const routes = mount({
-	'/': route({ view: <WelcomePage/> }),
-	// '/todo': route({view: <Homepage/> }),
-	'/todo/:id': route(req => {
-		return { view: <Todopage id={req.params.id} /> }
-	}),
+		'/': route({ view: <WelcomePage/> }),
+		'/user/all': route({ view: <AllUsersPage/> }),
+		'/user/:id': route(req => {
+				return { view: <UserPage id={req.params.id} /> }
+		}),		
+		// '/todo/:id': route(req => {
+		// 	return { view: <TodoPage id={req.params.id} /> }
+		// }),		
 	// future
-	// '/user/:id': route({view <UserPage/>}),
-	// '/user/all': route({view <AllUsers/>})
-	})
+	});
 
 	return (
 	<div>

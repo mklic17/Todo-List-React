@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-navi'
 import { useResource } from 'react-request-hook';
 import ToDoEntry from '../todo/ToDoEntry'
+import { StateContext } from '../Context';
 
 
 
 export default function TodoPage({ id }) {
+    const { state } = useContext(StateContext);
+
     const [ todo, getTodo ] = useResource(() => ({
         url: `/todo/${id}`,
-        method: 'get'
+        method: 'get',
+        headers: { 'Authorization': `${state.user.access_token}` }
     }))
 
     useEffect(getTodo, [id])

@@ -26,7 +26,6 @@ export default function WorkingPage() {
 
 	useEffect(() => {
         getToDos();
-		console.log('User Access Token-' + user.access_token);
     }, [user.access_token]);
 
 	useEffect(() => {
@@ -35,7 +34,7 @@ export default function WorkingPage() {
 		}
 	}, [toDos])
 
-	const { data, isLoading } = toDos;
+	// const { data, isLoading } = toDos;
 
 	return (
 		<div className="row">
@@ -51,7 +50,7 @@ export default function WorkingPage() {
 						<p>Friend Todo's</p>
 					</Tab> */}
 					<Tab eventKey="My" title="My Todos">
-						{isLoading && 'Todos are loading...'} <ToDoList/>
+						{toDos.isLoading === false && 'Todos are loading...'} <ToDoList/>
 					</Tab>
 				</Tabs>
 				
