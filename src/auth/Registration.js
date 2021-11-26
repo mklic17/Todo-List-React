@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useContext } from 'react/cjs/react.development';
+import React, { useState, useEffect, useContext } from 'react';
 import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
 import { Form, Modal, Button } from 'react-bootstrap'

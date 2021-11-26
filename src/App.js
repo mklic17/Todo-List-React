@@ -1,21 +1,19 @@
-	import React, { useReducer } from 'react'
-	import Navbar from './fragments/navbar'
-	import { mount, route } from 'navi';
-	import { Router, View } from 'react-navi';
-	import appReducer from './Reducer'
-	import 'bootstrap/dist/css/bootstrap.css'
-	import { StateContext } from './Context'
-	import WelcomePage from './pages/WelcomePage';
-	import TodoPage from './pages/TodoPage';
-	import UserPage from './pages/UserPage';
-	import AllUsersPage from './pages/AllUsersPage';
+import React, { useReducer } from 'react'
+import Navbar from './fragments/navbar'
+import { mount, route } from 'navi';
+import { Router, View } from 'react-navi';
+import appReducer from './Reducer'
+import 'bootstrap/dist/css/bootstrap.css'
+import { StateContext } from './Context'
+import WelcomePage from './pages/WelcomePage';
+import TodoPage from './pages/TodoPage';
+import UserPage from './pages/UserPage';
+import AllUsersPage from './pages/AllUsersPage';
 
 
-
-	function App() {
+function App() {
 
 	const [state, dispatch] = useReducer(appReducer, {user: {}, toDo: []});
-	// const { user } = state;
 
 	const routes = mount({
 		'/': route({ view: <WelcomePage/> }),
@@ -40,6 +38,6 @@
 		</StateContext.Provider>
 	</div>
 	)
-	}
+}
 
-	export default App;
+export default App;
