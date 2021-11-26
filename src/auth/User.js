@@ -1,12 +1,6 @@
-import React, { useContext } from 'react'
-// import { StateContext } from './Context'
-
+import React from 'react'
 
 export default function User ({firstName, lastName, email, password }) {
-
-    // const {state} = useContext(StateContext);
-    // const {user} = state;
-    // console.log(user)
 
     return (
          <div>

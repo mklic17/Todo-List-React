@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useContext } from 'react/cjs/react.development';
 import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
 import { Link } from 'react-navi';
