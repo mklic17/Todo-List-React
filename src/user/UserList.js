@@ -1,4 +1,5 @@
-import React, { useEffect, useContext }  from 'react';
+import React, { useEffect }  from 'react';
+import { useContext } from 'react/cjs/react.development';
 import { useResource } from 'react-request-hook'
 import UserListEntry from './UserListEntry';
 import { StateContext } from '../Context';
@@ -18,12 +19,6 @@ export default function UserList() {
         getAllUsers()
     }, [])
 
-    // useEffect(() =>{
-    //     getAllUsers()
-    // }, [])
-
-    // useEffect(getAllUsers, [state.user.access_token]);
-
     return (
         <div className="col-md-8 align-self-center">
             <div><Link href="/">Go back</Link></div>
@@ -38,10 +33,7 @@ export default function UserList() {
                          : 'Loading...'
                     }
                 </div>
-                
             </div>
         </div>
     )
-
-
 }

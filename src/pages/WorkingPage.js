@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useContext } from 'react/cjs/react.development';
 import { useResource } from 'react-request-hook';
-import { StateContext } from '../Context'
-import CreateToDoEntry from '../todo/CreateToDoEntry'
-import ToDoList from '../todo/ToDoList'
+import { StateContext } from '../Context';
+import CreateToDoEntry from '../todo/CreateToDoEntry';
+import ToDoList from '../todo/ToDoList';
+import AllTodoList from '../todo/AllTodoList'
 import { Tabs, Tab } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 export default function WorkingPage() {
@@ -18,23 +20,29 @@ export default function WorkingPage() {
 		headers: { 'Authorization': `${user.access_token}` }
 	}));
 
+	const [allToDos, getAllToDos] = useResource(() => ({
+		url: '/todo/all',
+		method: 'get',
+		headers: { 'Authorization': `${user.access_token}` }
+	}));
+
 	useEffect(() => {
 		if(state.user.access_token) {
 			getToDos();
+			getAllToDos();
 		}
 	}, []);
 
 	useEffect(() => {
         getToDos();
+		getAllToDos();
     }, [user.access_token]);
 
 	useEffect(() => {
 		if (toDos && toDos.data) {
 			dispatch({ type: 'FETCH_POSTS', toDos: toDos.data.todo })
 		}
-	}, [toDos])
-
-	// const { data, isLoading } = toDos;
+	}, [toDos]);
 
 	return (
 		<div className="row">
@@ -44,13 +52,20 @@ export default function WorkingPage() {
 			<div className="col-md-6">
 				<Tabs defaultActiveKey="My" className="mb-3">
 					<Tab eventKey="All" title="All Todo's">
-						<p>All Todo's</p>
+						<h2>All Todo's</h2>
+						<div>
+							{ (allToDos.data && allToDos.isLoading === false) 
+								? <AllTodoList allToDos={allToDos.data.todo} />
+								: 'Loading...'
+							}
+						</div>
 					</Tab>
 					{/* <Tab eventKey="Friend" title="Friend Todo's">
 						<p>Friend Todo's</p>
 					</Tab> */}
 					<Tab eventKey="My" title="My Todos">
-						{toDos.isLoading === false && 'Todos are loading...'} <ToDoList/>
+						{toDos.isLoading === true && 'Todos are loading...'} 
+						{toDos.isLoading === false} <ToDoList/>
 					</Tab>
 				</Tabs>
 				

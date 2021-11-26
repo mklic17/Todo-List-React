@@ -8,9 +8,9 @@ export default function UserEntry({ id, name, username, email, profileImage} ) {
 
     return (
         <div>
-            <h1>{name}</h1>
-            <p>{username}</p>
-            <p>{email}</p>
+            <h1>Name: {name}</h1>
+            <p>Username: {username}</p>
+            <p>Email: {email}</p>
             <img src={imageUrl} alt="..."/>
         </div>
         

@@ -6,7 +6,7 @@
 	import 'bootstrap/dist/css/bootstrap.css'
 	import { StateContext } from './Context'
 	import WelcomePage from './pages/WelcomePage';
-	// import TodoPage from './pages/TodoPage';
+	import TodoPage from './pages/TodoPage';
 	import UserPage from './pages/UserPage';
 	import AllUsersPage from './pages/AllUsersPage';
 
@@ -23,10 +23,9 @@
 		'/user/:id': route(req => {
 				return { view: <UserPage id={req.params.id} /> }
 		}),		
-		// '/todo/:id': route(req => {
-		// 	return { view: <TodoPage id={req.params.id} /> }
-		// }),		
-	// future
+		'/todo/:id': route(req => {
+			return { view: <TodoPage id={req.params.id} /> }
+		}),		
 	});
 
 	return (
