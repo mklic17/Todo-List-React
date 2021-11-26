@@ -1,10 +1,8 @@
 import React, { useContext, useEffect} from 'react'
-import './todo.css'
-import 'font-awesome/css/font-awesome.css'
 import {ThemeContext, StateContext} from '../Context'
 import { useResource } from 'react-request-hook';
-
-
+import './todo.css'
+import 'font-awesome/css/font-awesome.css'
 
 export default function ToDoEntry({ id, title, description, createdBy, createdDate, completedDate }) {
     let completedVar;
@@ -21,7 +19,6 @@ export default function ToDoEntry({ id, title, description, createdBy, createdDa
         headers: { 'Authorization': `${state.user.access_token}` }
     }));     
 
-    
     const [deleteToDo, deleteTodo ] = useResource((toDoId) => ({
         url: `/todo/${toDoId}`,
         method: 'DELETE',
@@ -40,6 +37,7 @@ export default function ToDoEntry({ id, title, description, createdBy, createdDa
         }
     }, [deleteToDo]);
 
+
     if (completedDate) {
         const dateToComplete = Math.ceil((Date.now() - completedDate) / (1000 * 3600 * 24));
         completedVar = <p>Completed <i className="fa fa-check fa-lg" id="greenFont"></i> { dateToComplete } day(s) ago</p>;
@@ -53,15 +51,14 @@ export default function ToDoEntry({ id, title, description, createdBy, createdDa
     return (
         <li className="quote-container">
             <div className="note note-background" style={ { background: colorName} }>
-                <h3>Temp: { id }</h3>
                 <h3>{ title }</h3>
                 <p>{ description }</p>
                 <p>{ new Date(createdDate).toLocaleDateString('en-US') }<br/></p>
                 { completedVar }
                 <div id={buttonLayout}>
                     { completeButton }
-                    <button onClick={ (evt) => {deleteTodo(id)} } className="btn btn-danger">Delete</button>
-                </div>
+                <button onClick={ (evt) => {deleteTodo(id)} } className="btn btn-danger">Delete</button>
+            </div>
             </div>
         </li>
     );
