@@ -6,7 +6,7 @@ export default function WelcomePage() {
     const { state } = useContext(StateContext);
 
     let codeToDisplay;
-    if(state.user.username) {
+    if(state.user.access_token) {
         codeToDisplay = <WorkingPage/>;
     } else {
         codeToDisplay = (

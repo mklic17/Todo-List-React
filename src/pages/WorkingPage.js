@@ -25,23 +25,29 @@ export default function WorkingPage() {
 		headers: { 'Authorization': `${user.access_token}` }
 	}));
 
-	useEffect(() => {
-		if(state.user.access_token) {
-			getToDos();
-			getAllToDos();
-		}
-	}, []);
+	// useEffect(() => {
+	// 	console.log('user.access_token: ' + user.access_token)
+	// 	if(user.access_token) {
+	// 		getToDos();
+	// 		getAllToDos();
+	// 	}
+	// }, []);
 
 	useEffect(() => {
-        getToDos();
-		getAllToDos();
+		console.log(toDos.data)
+			getToDos();
+			getAllToDos();
     }, [user.access_token]);
 
 	useEffect(() => {
-		if (toDos && toDos.data) {
+		if (toDos && toDos.data && toDos.isLoading === false) {
+			console.log(toDos.data)
 			dispatch({ type: 'FETCH_POSTS', toDos: toDos.data.todo })
 		}
 	}, [toDos]);
+
+	const { data, isLoading } = toDos;
+
 
 	return (
 		<div className="row">
@@ -54,17 +60,25 @@ export default function WorkingPage() {
 						<h2>All Todo's</h2>
 						<div>
 							{ (allToDos.data && allToDos.isLoading === false) 
-								? <AllTodoList allToDos={allToDos.data.todo} />
+								? <AllTodoList allToDos={allToDos.data} />
 								: 'Loading...'
 							}
-						</div>
+						</div> 
 					</Tab>
 					{/* <Tab eventKey="Friend" title="Friend Todo's">
 						<p>Friend Todo's</p>
 					</Tab> */}
 					<Tab eventKey="My" title="My Todos">
-						{toDos.isLoading === true && 'Todos are loading...'} 
-						{toDos.isLoading === false} <ToDoList/>
+						<div>
+							{ (data && isLoading === false) 
+								? <ToDoList />
+								: 'Loading...'
+							}
+						</div> 
+						{/* {toDos.isLoading === true && 'Todos are loading...'}  */}
+						{/* {toDos.isLoading === false} <ToDoList/> */}
+						{/* {toDos.isLoading && 'Todos loading...'} <ToDoList /> */}
+
 					</Tab>
 				</Tabs>
 				
