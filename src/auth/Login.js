@@ -1,52 +1,66 @@
-import React, {useState, useContext, useEffect} from 'react'
-import {StateContext} from '../Context';
+import React, { useState, useEffect } from 'react'
+import { useContext } from 'react/cjs/react.development';
+import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
+import { Modal, Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css'
 
-// import './auth.css'
-// import 'font-awesome/css/font-awesome.css'
 
-
-export default function Login() {
-
-    const [ loginFailed, setLoginFailed ] = useState(false);
+export default function Login({show, handleClose}) {
 
     const {dispatch} = useContext(StateContext);
+    const [ loginFailed, setLoginFailed ] = useState(false);
     const [formData, setFormData] = useState({
         username: '',
         password: ''
     })
 
     const [ user, login ] = useResource((username, password) => ({
-        url: `/login/${encodeURI(username)}/${encodeURI(password)}`,
-        method: 'get'
-    }))
+        url: `/auth/login`,
+        method: 'post',
+        data: { username, password } 
+    }));
 
     useEffect(() => {
-        if (user && user.data) {
-            if (user.data.length > 0) {
-                setLoginFailed(false)
-                dispatch({ type: 'LOGIN', username: user.data[0].username })
+        if (user && user.isLoading === false && (user.data || user.error)) {
+            if (user.error) {
+                setLoginFailed(true);
+                alert('failed');
             } else {
-                setLoginFailed(true)
+                setLoginFailed(false);
+                console.log('UserId: ' + user.data.id);
+                dispatch({ type: 'REGISTRATION', 'id': user.data.id, 'username': formData.username, access_token: user.data.access_token });
             }
         } 
-    }, [user])
+    }, [user]);
+
 
     return (
-        <div>
-            <br/>
-            <center><h3>Login</h3></center>
-            <form onSubmit={evt => { evt.preventDefault(); login(formData.username, formData.password) }}>
-                <label htmlFor="username-input">UserName: </label>
-                <input type="text" name="username-input" value={formData.username} onChange={evt => {setFormData({...formData, username: evt.target.value})}} className="form-control" placeholder="Username"></input>
-                <br/>
-                <label htmlFor="password-input">Password: </label>
-                <input type="password" name="password-input" value={formData.password} onChange={evt => {setFormData({...formData, password: evt.target.value})}} className="form-control" placeholder="Password"></input>
-                <br/>
-                <button className="btn btn-md btn-primary btn-block" type="submit">Login</button>
-            </form>
-            {loginFailed && <span style={{ color: 'red' }}>Invalid username or password</span>}
-       </div>
+        <Modal show={show} onHide={handleClose}>
+            <Form onSubmit={evt => { evt.preventDefault(); login(formData.username, formData.password); handleClose(); }}>
+
+                <Modal.Header closeButton>
+                    <Modal.Title>Login</Modal.Title>
+                </Modal.Header>
+                
+                <Modal.Body>
+                    <Form.Label htmlFor="username-input">UserName:</Form.Label>
+                    <Form.Control type="text" name="username-input" value={formData.username} onChange={evt => {setFormData({...formData, username: evt.target.value})}} placeholder="Username"/>
+                    <br/>
+                    <Form.Label htmlFor="password-input">Password:</Form.Label>
+                    <Form.Control type="password" name="password-input" value={formData.password} onChange={evt => {setFormData({...formData, password: evt.target.value})}}placeholder="Password"/>
+                    {loginFailed && <span style={{ color: 'red' }}>Invalid username or password</span>}
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button className="secondary" onClick={handleClose}>Cancel</Button>
+                    <Button className="primary" disabled={formData.username.length === 0} type="submit">Login</Button>
+                </Modal.Footer>
+            </Form>
+        </Modal>
+
+
+        
     );
     
 }

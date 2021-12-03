@@ -1,41 +1,43 @@
-import React, { useContext} from 'react'
-import './todo.css'
-import 'font-awesome/css/font-awesome.css'
+import React, { useEffect} from 'react'
+import { useContext } from 'react/cjs/react.development';
 import {ThemeContext, StateContext} from '../Context'
 import { useResource } from 'react-request-hook';
+import './todo.css'
+import 'font-awesome/css/font-awesome.css'
 
-
-
-export default function ToDoEntry({id, title, description, createdBy, createdDate, completedDate}) {
+export default function ToDoEntry({ id, title, description, createdBy, createdDate, completedDate }) {
     let completedVar;
     let completeButton;
     let buttonLayout;
 
-    const {dispatch} = useContext(StateContext);
+    const { dispatch, state } = useContext(StateContext);
     const theme = useContext(ThemeContext);
     const colorName = theme.primary;
 
-    const markAsComplete = () => {
-        completedDate = Date.now();
-        patchTodo({completedDate: completedDate});
-        dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedDate});
-    };
-
-    const deleteEntry = () => {
-        deleteTodo();
-        dispatch({type: 'DELETE_TODO', id: id});
-    }
-
-    const [complete, patchTodo] = useResource(({completedDate}) => ({
-        url: `/todos/${id}`,
+    const [completedToDo, patchTodo] = useResource((toDoId) => ({
+        url: `/todo/${toDoId}/complete`,
         method: 'PATCH',
-        data: { completedDate }
+        headers: { 'Authorization': `${state.user.access_token}` }
+    }));     
+
+    const [deleteToDo, deleteTodo ] = useResource((toDoId) => ({
+        url: `/todo/${toDoId}`,
+        method: 'DELETE',
+        headers: { 'Authorization': `${state.user.access_token}` }
     }));
 
-    const [emptyToDo, deleteTodo ] = useResource(() => ({
-        url: `/todos/${id}`,
-        method: 'DELETE'
-    }));
+    useEffect(() => {
+        if(completedToDo && completedToDo.data && completedToDo.isLoading === false) {
+            dispatch({type: 'TOGGLE_TODO', id: id, completedDate: completedToDo.data.completedDate});
+        }
+    }, [completedToDo]);
+
+    useEffect(() => {
+        if(deleteToDo && deleteToDo.data && deleteToDo.isLoading === false) {
+            dispatch({type: 'DELETE_TODO', id: id});
+        }
+    }, [deleteToDo]);
+
 
     if (completedDate) {
         const dateToComplete = Math.ceil((Date.now() - completedDate) / (1000 * 3600 * 24));
@@ -43,7 +45,7 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
         buttonLayout = "oneButtonLayout";
     } else {
         completedVar = <p>Not Completed <i className="fa fa-times" id="redFont"></i></p>;
-        completeButton = <button onClick={markAsComplete} className="btn btn-success">Complete</button>;
+        completeButton = <button onClick={(evt) => patchTodo(id)} className="btn btn-success">Complete</button>;
         buttonLayout = "twoButtonLayout";
     }
 
@@ -56,8 +58,8 @@ export default function ToDoEntry({id, title, description, createdBy, createdDat
                 { completedVar }
                 <div id={buttonLayout}>
                     { completeButton }
-                    <button onClick={ deleteEntry } className="btn btn-danger">Delete</button>
-                </div>
+                <button onClick={ (evt) => {deleteTodo(id)} } className="btn btn-danger">Delete</button>
+            </div>
             </div>
         </li>
     );

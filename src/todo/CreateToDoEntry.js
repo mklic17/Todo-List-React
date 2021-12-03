@@ -1,32 +1,32 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import { useContext } from 'react/cjs/react.development';
 import { StateContext } from '../Context';
 import { useResource } from 'react-request-hook';
 
 export default function CreateListEntry () {
 
-    const {state, dispatch} = useContext(StateContext);
+    const { state, dispatch } = useContext(StateContext);
+    const { user } = state;
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        createdBy: state.user,
-        createdDate: Date.now(),
-        completedDate: undefined
     });
 
-    const[todo, createToDoEntry] = useResource(({ title, description, createdBy, createdDate, completedDate }) => ({
-        url: '/todos',
+    const[todo, createToDoEntry] = useResource(({ title, description }) => ({
+        url: '/todo',
         method: 'post',
-        data: { title, description, createdBy, createdDate, completedDate }
+        headers: { 'Authorization': `${state.user.access_token}` },
+        data: { title, description, createdBy: user.username }
     }));
 
     function handleCreate () {
-        createToDoEntry({ title: formData.title, description: formData.description, createdBy: state.user, createdDate: formData.createdDate, completedDate: null })
+        createToDoEntry({ title: formData.title, description: formData.description})
     }
 
     useEffect(() => {
-        if(todo && todo.data) {
-            console.log(todo.data)
-            dispatch({type: 'CREATE_TODO', id: todo.data.id, title: todo.data.title, description: todo.data.description, createdBy: todo.data.user, createdDate: todo.data.createdDate, completedDate: todo.data.completedDate})
+        if(todo && todo.data && todo.isLoading === false) {
+            console.log('Todo: ' + todo.data.id);
+            dispatch({type: 'CREATE_TODO', id: todo.data.id, title: formData.title, description: formData.description, createdBy: user.username, createdDate: todo.data.createdDate, completedDate: todo.data.completedDate})
         }
     }, [todo]);
 
@@ -41,7 +41,7 @@ export default function CreateListEntry () {
                 <br/>
                 <textarea type="text" className="form-control" value={formData.description} onChange={evt => setFormData({...formData, description: evt.target.value})} name="create-description" id="create-description" cols="40" rows="5"/>
                 <br/>
-                <p>Author: <b>{ state.user }</b></p>
+                <p>Author: <b>{ user.username }</b></p>
                 <br/>
             </div>
             <input type="submit" value="Create" />
