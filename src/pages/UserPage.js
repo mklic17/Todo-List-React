@@ -30,10 +30,10 @@ export default function UserPage({ id }) {
 
     return (
         <span>
+            <br/>
             <div><Link href="/user/all">All User Page</Link></div>
-            <h1>Viewing User</h1>
-            {(theUser.data && theUser.isLoading === false)
-                ?  <div><UserEntry id={id} name={theUser.data.name} username={theUser.data.username} email={theUser.data.email} profileImage={theUser.data.profileImage}/></div>
+            {(theUser.data && theUser.isLoading === false && userTodos.data && userTodos.isLoading === false)
+                ?  <div><UserEntry id={id} name={theUser.data.name} username={theUser.data.username} email={theUser.data.email} profileImage={theUser.data.profileImage} totalCount={userTodos.data.todo.length}/></div>
                 : 'Loading...'
             }
             
